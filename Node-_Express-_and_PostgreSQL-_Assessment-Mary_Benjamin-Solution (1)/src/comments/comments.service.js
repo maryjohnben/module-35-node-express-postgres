@@ -1,11 +1,11 @@
-const db = require("../db/connection");
+const knex = require("../db/connection");
 
 function list() {
-  return db("comments").select("*");
+  return knex("comments").select("*");
 }
 
 function listCommenterCount() {
-  return db("comments as c")
+  return knex("comments as c")
     .join("users as u", "u.user_id", "c.commenter_id")
     .select("u.user_email as commenter_email")
     .count("c.comment_id")
@@ -14,7 +14,7 @@ function listCommenterCount() {
 }
 
 function read(commentId) {
-  return db("comments as c")
+  return knex("comments as c")
     .where({ comment_id: commentId })
     .join("users as u", "u.user_id", "c.commenter_id")
     .join("posts as p", "p.post_id", "c.post_id")
@@ -24,7 +24,7 @@ function read(commentId) {
       "p.post_body as commented_post",
       "u.user_email as commenter_email"
     )
-    .then((readItem) => readItem[0]);
+    .then((item) => item[0]);
 }
 
 module.exports = {

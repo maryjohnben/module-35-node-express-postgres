@@ -18,8 +18,8 @@ async function list(req, res, next) {
 
 async function listCommenterCount(req, res, next) {
   const listed = await service.listCommenterCount();
-  listed.map((cCount) => {
-    cCount.count = Number(cCount.count);
+  listed.map((eachCount) => {
+    eachCount.count = Number(eachCount.count);
   });
   res.json({ data: listed });
 }

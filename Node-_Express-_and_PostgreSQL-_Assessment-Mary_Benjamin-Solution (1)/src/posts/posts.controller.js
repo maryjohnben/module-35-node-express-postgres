@@ -13,14 +13,13 @@ async function postExists(req, res, next) {
 }
 
 async function create(req, res) {
-  const nPData = req.body.data
-  const newPost = await service.create(nPData)
+  const newPost = await service.create(req.body.data)
   res.status(201).json({ data: newPost });
 }
 
 async function update(req, res) {
-  const nPData = req.body.data
-  const updatedPost = await service.update(nPData)
+  const updateData = req.body.data
+  const updatedPost = await service.update(updateData)
   res.json({ data: updatedPost });
 }
 
